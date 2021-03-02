@@ -24,6 +24,12 @@ public class Main {
         Hotel h = new Hotel("v2");
         h.setRank(5);
         
+        Church c = new Church("v3");
+        c.setOpeningTime(LocalTime.of(7, 0));
+        c.setClosingTime(LocalTime.MIDNIGHT);
+        
+        Visitable[] arr = {m, c};
+        
         c1.addLocation(m);
         c1.addLocation(h);
         System.out.println(c1.toString());

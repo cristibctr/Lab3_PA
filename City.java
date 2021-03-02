@@ -27,6 +27,8 @@ public class City {
     public void addLocation(Location node)
     {
         nodes.add(node);
+        for(Location i : nodes)
+            i.setCost(node, (int) Math.random() *1000000 %10);
     }
 
     @Override

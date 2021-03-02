@@ -36,7 +36,7 @@ public abstract class Location implements Comparable<Location>{
     public String toString() {
         String returnStr = "";
         for(Location i : cost.keySet())
-            returnStr += name + "->" + i.getName() + " " + cost.get(i);
+            returnStr += name + "->" + i.getName() + " " + cost.get(i) + "\n";
         return returnStr;
     }
     @Override
