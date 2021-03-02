@@ -6,6 +6,7 @@
 package lab3_pa;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -27,6 +28,7 @@ public class City {
     public void addLocation(Location node)
     {
         nodes.add(node);
+        Collections.sort(nodes, Location::compareTo);
         for(Location i : nodes)
         {
             if(i.compareTo(node) == 0)

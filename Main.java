@@ -21,16 +21,21 @@ public class Main {
         m.setClosingTime(LocalTime.parse("17:00"));
         m.setTicketPrice(20);
         
-        Hotel h = new Hotel("v2");
+        Hotel h = new Hotel("v4");
         h.setRank(5);
         
-        Church c = new Church("v3");
+        Church c = new Church("v2");
         c.setOpeningTime(LocalTime.of(7, 0));
         c.setClosingTime(LocalTime.MIDNIGHT);
+        
+        Church c2 = new Church("v3");
+        c2.setOpeningTime(LocalTime.of(7, 0));
+        c2.setClosingTime(LocalTime.MIDNIGHT);
         
         c1.addLocation(m);
         c1.addLocation(h);
         c1.addLocation(c);
+        c1.addLocation(c2);
         System.out.println(c1.toString());
     }
     
