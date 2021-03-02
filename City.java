@@ -28,7 +28,11 @@ public class City {
     {
         nodes.add(node);
         for(Location i : nodes)
-            i.setCost(node, (int) Math.random() *1000000 %10);
+        {
+            if(i.compareTo(node) == 0)
+                continue;
+            i.setCost(node, (int) (Math.random() * 10));
+        }
     }
 
     @Override
