@@ -33,10 +33,76 @@ public class City {
         {
             if(i.compareTo(node) == 0)
                 continue;
-            i.setCost(node, (int) (Math.random() * 10));
+            i.setCost(node, (int) (Math.random() * 10)+1);
         }
     }
-
+    public void printVisitable(){
+        System.out.println("The locations that are visitable but not payable are:");
+        List<Location> visitableLocations = new ArrayList<>();
+        Boolean OK = true;
+        //Loop through each node and add it in visitableLocations array. The position depends on getOpeningTime()
+        //I downcast every object in nodes to Visitable in order to access getOpeningTime() method
+        for(Location loc:nodes)
+        {
+            //Check if location is visitable and not payable
+            if(loc instanceof Visitable && !(loc instanceof Payable))
+                if(visitableLocations.isEmpty())
+                    //If it's the first object add it to the array no matter the order
+                    visitableLocations.add(loc);
+                else
+                {
+                    //Loop through the already added locations
+                    for(int sortIndex = 0; sortIndex < visitableLocations.size(); sortIndex++)
+                        if(((Visitable)loc).getOpeningTime().isBefore(((Visitable)visitableLocations.get(sortIndex)).getOpeningTime()))
+                        {
+                            //Compare opening times and add it to the array before the next "bigger" time
+                            visitableLocations.add(sortIndex, loc);
+                            OK = false;
+                            break;
+                        }
+                    //If it wasn't added until the end of the loop, add it now
+                    if(OK)
+                        visitableLocations.add(loc);
+                }
+        }
+        for(Location i : visitableLocations)
+        {
+            System.out.printf("%s", i.getName() + " opening hours: ");
+            System.out.println(((Visitable)i).getOpeningTime());
+        }
+    }
+    public int[][] getCostMatrix(){
+        int[][] costMatr = new int[nodes.size()][nodes.get(0).getCost().size()];
+        int[] arr;
+        int i = 0;
+        for(Location loc : nodes)
+        {
+            arr = loc.getCostArr();
+            for(int j = 0; j < arr.length; j++)
+                costMatr[i][j] = arr[j];
+            for(int j = arr.length; j < costMatr[i].length; j++)
+                costMatr[i][j] = 0;
+            i++;
+        }
+        return costMatr;
+    }
+    public Location[][] getLocMatrix()
+    {
+        Location[][] locMatr = new Location[nodes.size()][nodes.get(0).getCost().size()];
+        int i = 0;
+        for(Location loc : nodes)
+        {
+            locMatr[i] = loc.getLocationArr();
+            i++;
+        }
+        return locMatr;
+    }
+    public List<Location> getNodes() {
+        return nodes;
+    }
+    public Location[] getNodesArr() {
+        return nodes.toArray(new Location[0]);
+    }
     @Override
     public String toString() {
         String returnStr = cityName + ":\n";

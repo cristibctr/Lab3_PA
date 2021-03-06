@@ -31,7 +31,29 @@ public abstract class Location implements Comparable<Location>{
     public void setCost(Location node, int value) {
         cost.put(node, value);
     }
-
+    
+    public int[] getCostArr()
+    {
+        int[] array = new int[cost.size()];
+        int i = 0;
+        for(Location loc : cost.keySet())
+        {
+            array[i] = cost.get(loc);
+            i++;
+        }
+        return array;
+    }
+    public Location[] getLocationArr()
+    {
+        Location[] array = new Location[cost.size()];
+        int i = 0;
+        for(Location loc : cost.keySet())
+        {
+            array[i] = loc;
+            i++;
+        }
+        return array;
+    }
     @Override
     public String toString() {
         String returnStr = "";

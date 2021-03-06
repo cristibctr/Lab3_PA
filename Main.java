@@ -21,22 +21,35 @@ public class Main {
         m.setClosingTime(LocalTime.parse("17:00"));
         m.setTicketPrice(20);
         
+        Church c = new Church("v2");
+        c.setOpeningTime(c.setOpeningTime());
+        c.setClosingTime(c.setClosingTime());
+        
+        Church c2 = new Church("v3");
+        c2.setOpeningTime(LocalTime.of(6, 0));
+        c2.setClosingTime(LocalTime.MIDNIGHT);
+        
         Hotel h = new Hotel("v4");
         h.setRank(5);
         
-        Church c = new Church("v2");
-        c.setOpeningTime(LocalTime.of(7, 0));
-        c.setClosingTime(LocalTime.MIDNIGHT);
+        Church c3 = new Church("v5");
+        c3.setOpeningTime(LocalTime.of(7, 0));
+        c3.setClosingTime(LocalTime.of(17,0));
         
-        Church c2 = new Church("v3");
-        c2.setOpeningTime(LocalTime.of(7, 0));
-        c2.setClosingTime(LocalTime.MIDNIGHT);
+        System.out.println(Visitable.getVisitingDuration(c.getOpeningTime(), c.getClosingTime()));
         
         c1.addLocation(m);
         c1.addLocation(h);
         c1.addLocation(c);
         c1.addLocation(c2);
+        c1.addLocation(c3);
         System.out.println(c1.toString());
+        c1.printVisitable();
+        TravelPlan myPlan = new TravelPlan(c1);
+        myPlan.randomPreferences();
+        myPlan.shortestPathPref();
+        
+        c1.getCostMatrix();
     }
     
 }
