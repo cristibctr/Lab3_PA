@@ -72,7 +72,7 @@ public class City {
         }
     }
     public int[][] getCostMatrix(){
-        int[][] costMatr = new int[nodes.size()][nodes.get(0).getCost().size()];
+        int[][] costMatr = new int[nodes.size()][nodes.get(0).getCost().size()+1];
         int[] arr;
         int i = 0;
         for(Location loc : nodes)
@@ -80,10 +80,17 @@ public class City {
             arr = loc.getCostArr();
             for(int j = 0; j < arr.length; j++)
                 costMatr[i][j] = arr[j];
-            for(int j = arr.length; j < costMatr[i].length; j++)
-                costMatr[i][j] = 0;
+            for(int j = i; j < arr.length; j++)
+                costMatr[i][j+1] = costMatr[i][j];
+            costMatr[i][i] = 0;
             i++;
         }
+//        for (i = 0; i < costMatr.length; i++) {
+//            for (int j = 0; j < costMatr[i].length; j++) {
+//                System.out.print(costMatr[i][j] + " ");
+//            }
+//            System.out.println();
+//        }
         return costMatr;
     }
     public Location[][] getLocMatrix()
@@ -95,6 +102,12 @@ public class City {
             locMatr[i] = loc.getLocationArr();
             i++;
         }
+//        for (i = 0; i < locMatr.length; i++) {
+//            for (int j = 0; j < locMatr[i].length; j++) {
+//                System.out.print(locMatr[i][j] + " ");
+//            }
+//            System.out.println();
+//        }
         return locMatr;
     }
     public List<Location> getNodes() {

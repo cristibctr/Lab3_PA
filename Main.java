@@ -46,6 +46,7 @@ public class Main {
         System.out.println(c1.toString());
         c1.printVisitable();
         TravelPlan myPlan = new TravelPlan(c1);
+        
         myPlan.randomPreferences();
         myPlan.shortestPathPref();
         

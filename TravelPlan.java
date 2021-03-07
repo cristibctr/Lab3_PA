@@ -60,7 +60,7 @@ public class TravelPlan {
             shortestPath = path.dijkstra(firstCity.getCostMatrix(), j);
             for(j = 0; j < shortestPath.length; j++)
                 if(shortestPath[j] > 100)
-                    shortestPath[j] = (int)(Math.random()*10);
+                    shortestPath[j] = 0;
             for(int b : shortestPath)
                 System.out.printf("%d ", b);
             System.out.println();
